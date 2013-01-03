@@ -105,8 +105,8 @@ public class Login extends Activity {
 	        }
         }
        
-		protected void onPostExecute(Boolean ex) {
-			if(!ex) {
+		protected void onPostExecute(Boolean executed) {
+			if(!executed) {
 				Toast invalidLogin = Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG);
 				invalidLogin.show();
 			}
