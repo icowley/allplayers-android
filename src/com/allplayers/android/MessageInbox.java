@@ -38,6 +38,40 @@ public class MessageInbox extends Activity {
             GetUserInboxTask helper = new GetUserInboxTask();
             helper.execute();
         }
+        else{
+            populateInbox(jsonResult);
+        }
+    }
+
+    public void populateInbox(String json) {
+        MessagesMap messages = new MessagesMap(json);
+        messageList = messages.getMessageData();
+
+        Collections.reverse(messageList);
+
+        ListView list = (ListView) findViewById(R.id.customListView);
+        list.setClickable(true);
+
+        if (!messageList.isEmpty()) {
+            hasMessages = true;
+        } else {
+            hasMessages = false;
+        }
+
+        final List<MessageData> messageList2 = messageList;
+        MessageAdapter adapter = new MessageAdapter(MessageInbox.this, messageList2);
+
+        list.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View view, int position, long index) {
+                if (hasMessages) {
+                    // Go to the message thread.
+                    Intent intent = (new Router(MessageInbox.this)).getMessageThreadIntent(messageList.get(position));
+                    startActivity(intent);
+                }
+            }
+        });
+
+        list.setAdapter(adapter);
     }
 
     public class GetUserInboxTask extends AsyncTask<Void, Void, String> {
@@ -46,34 +80,7 @@ public class MessageInbox extends Activity {
         }
 
         protected void onPostExecute(String jsonResult) {
-            MessagesMap messages = new MessagesMap(jsonResult);
-            messageList = messages.getMessageData();
-
-            Collections.reverse(messageList);
-
-            ListView list = (ListView) findViewById(R.id.customListView);
-            list.setClickable(true);
-
-            if (!messageList.isEmpty()) {
-                hasMessages = true;
-            } else {
-                hasMessages = false;
-            }
-
-            final List<MessageData> messageList2 = messageList;
-            MessageAdapter adapter = new MessageAdapter(MessageInbox.this, messageList2);
-
-            list.setOnItemClickListener(new OnItemClickListener() {
-                public void onItemClick(AdapterView<?> arg0, View view, int position, long index) {
-                    if (hasMessages) {
-                        // Go to the message thread.
-                        Intent intent = (new Router(MessageInbox.this)).getMessageThreadIntent(messageList.get(position));
-                        startActivity(intent);
-                    }
-                }
-            });
-
-            list.setAdapter(adapter);
+            populateInbox(jsonResult);
         }
     }
 }
