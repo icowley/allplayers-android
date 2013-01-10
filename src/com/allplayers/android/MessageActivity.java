@@ -29,7 +29,6 @@ public class MessageActivity extends ListActivity {
 
         //check local storage
         if (LocalStorage.getTimeSinceLastModification("Inbox") / 1000 / 60 < 15) { //more recent than 15 minutes
-            jsonResult = LocalStorage.readInbox(getBaseContext());
             populateInbox();
         } else {
             GetUserInboxTask helper = new GetUserInboxTask();
@@ -59,9 +58,9 @@ public class MessageActivity extends ListActivity {
      * user with the messages.
      */
     protected void populateInbox() {
+        jsonResult = LocalStorage.readInbox(getBaseContext());
         MessagesMap messages = new MessagesMap(jsonResult);
         messageList = messages.getMessageData();
-
         HashMap<String, String> map;
 
         if (!messageList.isEmpty()) {
@@ -91,9 +90,6 @@ public class MessageActivity extends ListActivity {
         setListAdapter(adapter);
     }
 
-    /*
-     * Fetches a user's inbox using a rest call.
-     */
     public class GetUserInboxTask extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... args) {
             return RestApiV1.getUserInbox();
