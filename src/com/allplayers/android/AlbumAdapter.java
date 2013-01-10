@@ -69,14 +69,14 @@ public class AlbumAdapter extends ArrayAdapter<AlbumData> {
 
         if (!imageURL.trim().equals("")) {
             GetRemoteImageTask helper = new GetRemoteImageTask();
-            helper.execute(album,position);
+            helper.execute(album, position);
         }
 
         //Set extra info
         albumExtraInfo.setText("");
         return row;
     }
-    
+
     /*
      * Gets an albums cover photo with a rest call.
      */

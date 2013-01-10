@@ -72,6 +72,9 @@ public class PhotoAdapter extends ArrayAdapter<PhotoData> {
         return row;
     }
 
+    /*
+     * Gets a user's image using a rest call.
+     */
     public class GetRemoteImageTask extends AsyncTask<Object, Void, Bitmap> {
         int row;
         protected Bitmap doInBackground(Object... photos) {

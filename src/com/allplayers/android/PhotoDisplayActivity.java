@@ -88,6 +88,9 @@ public class PhotoDisplayActivity extends Activity implements OnTouchListener {
         return true;
     }
 
+    /*
+     * Get's a user's image using a rest call and displays it.
+     */
     public class GetRemoteImageOnTouchTask extends AsyncTask<String, Void, Bitmap> {
 
         protected Bitmap doInBackground(String... photoUrl) {
@@ -101,6 +104,9 @@ public class PhotoDisplayActivity extends Activity implements OnTouchListener {
         }
     }
 
+    /*
+     * Get's a user's image using a rest call and displays it.
+     */
     public class GetRemoteImageTask extends AsyncTask<String, Void, Bitmap> {
 
         protected Bitmap doInBackground(String... photoUrl) {

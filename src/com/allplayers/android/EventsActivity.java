@@ -83,7 +83,7 @@ public class EventsActivity extends ListActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, list, android.R.layout.simple_list_item_2, from, to);
         setListAdapter(adapter);
     }
-    
+
     /*
      * Gets event information for a user using a rest call.
      */

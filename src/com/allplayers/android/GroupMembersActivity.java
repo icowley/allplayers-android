@@ -24,7 +24,9 @@ public class GroupMembersActivity extends ListActivity {
         GetGroupMembersByGroupIdTask helper = new GetGroupMembersByGroupIdTask();
         helper.execute(group);
     }
-
+    /*
+     * Gets a group's members using a rest call and populates an array with the data.
+     */
     public class GetGroupMembersByGroupIdTask extends AsyncTask<GroupData, Void, String> {
 
         protected String doInBackground(GroupData... groups) {

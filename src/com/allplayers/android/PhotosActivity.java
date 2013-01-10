@@ -89,6 +89,9 @@ public class PhotosActivity  extends ListActivity {
         }
     }
 
+    /*
+     * Gets a user's groups using a rest call.
+     */
     public class GetUserGroupsTask extends AsyncTask<Void, Void, String> {
 
         protected String doInBackground(Void... args) {
@@ -101,6 +104,9 @@ public class PhotosActivity  extends ListActivity {
         }
     }
 
+    /*
+     * Gets a group's photo albums using a rest call.
+     */
     public class GetGroupAlbumsByGroupIdTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... group_uuid) {

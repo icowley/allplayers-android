@@ -81,6 +81,9 @@ public class GroupsActivity extends ListActivity {
         setListAdapter(adapter);
     }
 
+    /*
+     * Fetches the groups a user belongs to and stores the data locally.
+     */
     public class GetUserGroupsTask extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... args) {
             return RestApiV1.getUserGroups();

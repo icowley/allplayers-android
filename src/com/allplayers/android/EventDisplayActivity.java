@@ -24,7 +24,7 @@ public class EventDisplayActivity extends MapActivity {
         TextView eventInfo = (TextView)findViewById(R.id.eventInfo);
         MapView map = (MapView)findViewById(R.id.eventMap);
 
-        EventData event =  (new Router(this)).getIntentEvent();
+        EventData event = (new Router(this)).getIntentEvent();
         eventInfo.setText("Event Title: " + event.getTitle() + "\nDescription: " +
                           event.getDescription() + "\nCategory: " + event.getCategory() +
                           "\nStart: " + event.getStartDateString() + "\nEnd: " + event.getEndDateString());

@@ -67,7 +67,7 @@ public class Login extends Activity {
                 EditText usernameEditText = (EditText)findViewById(R.id.usernameField);
                 EditText passwordEditText = (EditText)findViewById(R.id.passwordField);
 
-                String email= usernameEditText.getText().toString();
+                String email = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();;
 
                 BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
@@ -115,7 +115,7 @@ public class Login extends Activity {
         }
 
         protected void onPostExecute(Boolean ex) {
-            if(!ex) {
+            if (!ex) {
                 Toast invalidLogin = Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG);
                 invalidLogin.show();
             }

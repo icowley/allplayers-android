@@ -46,7 +46,7 @@ public class MessageInbox extends Activity {
     public void populateInbox(String json) {
         MessagesMap messages = new MessagesMap(json);
         messageList = messages.getMessageData();
-
+        
         Collections.reverse(messageList);
 
         ListView list = (ListView) findViewById(R.id.customListView);
@@ -73,7 +73,10 @@ public class MessageInbox extends Activity {
 
         list.setAdapter(adapter);
     }
-
+    
+    /*
+     * Fetches a user's inbox and populates a list with it.
+     */
     public class GetUserInboxTask extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... Args) {
             return jsonResult = RestApiV1.getUserInbox();

@@ -44,6 +44,9 @@ public class GroupEventsActivity extends ListActivity {
         }
     }
 
+    /*
+     * Gets a group's events using a rest call and places the data into a hash map.
+     */
     public class GetIntentGroupTask extends AsyncTask<GroupData, Void, String> {
 
         protected String doInBackground(GroupData... groups) {

@@ -77,6 +77,9 @@ public class MessageSent extends ListActivity {
         }
     }
 
+    /*
+     * Gets a user's sent mail box and populates a hash map with the data.
+     */
     public class GetUserSentBoxTask extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... Args) {
             return RestApiV1.getUserSentBox();
