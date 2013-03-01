@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
@@ -24,7 +25,7 @@ public class GroupsFragment extends ListFragment{
     private int pageNumber = 0;
     private int currentAmountShown = 0;
     private ArrayAdapter<String> adapter;
-    private TextView loadingMore;
+    private ProgressBar loadingMore;
 
     /** Called when the activity is first created. */
     @Override
@@ -33,10 +34,8 @@ public class GroupsFragment extends ListFragment{
         groupList = new ArrayList<GroupData>();
         adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
 
-        loadingMore = new TextView(this.getActivity());
-        loadingMore.setTextColor(Color.WHITE);
-        loadingMore.setText("LOADING MORE GROUPS...");
-        loadingMore.setTextSize(20);
+        loadingMore = new ProgressBar(this.getActivity());
+        
            
         GetUserGroupsTask helper = new GetUserGroupsTask();
         helper.execute();
@@ -96,7 +95,7 @@ public class GroupsFragment extends ListFragment{
             // not to try to load more groups.
             if (counter < 8) {
                 loadMore = false;
-                loadingMore.setVisibility(View.GONE);
+                getListView().removeFooterView(loadingMore);
             }
 
             hasGroups = true;
