@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class PhotosFragment extends ListFragment{
-	private ArrayList<AlbumData> albumList = new ArrayList<AlbumData>();
+public class PhotosFragment extends ListFragment {
+    private int groupCounter = 0;
+    private int totalNumOfGroups = 0;
+    private ArrayList<AlbumData> albumList = new ArrayList<AlbumData>();
 
     /** Called when the activity is first created. */
     @Override
@@ -57,7 +59,7 @@ public class PhotosFragment extends ListFragment{
     }
 
     @Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
         if (!albumList.isEmpty()) {
@@ -78,14 +80,20 @@ public class PhotosFragment extends ListFragment{
 
         if (!groupList.isEmpty()) {
             String group_uuid;
-
+            totalNumOfGroups = groupList.size();
+            System.out.println("Total num of groups is " + totalNumOfGroups);
             LocalStorage.writeUserAlbums(this.getActivity().getBaseContext(), "", true);
 
-            for (int i = 0; i < groupList.size(); i++) {
+            for (int i = 0; i < totalNumOfGroups; i++) {
                 group_uuid = groupList.get(i).getUUID();
                 GetGroupAlbumsByGroupIdTask helper = new GetGroupAlbumsByGroupIdTask();
                 helper.execute(group_uuid);
             }
+        } else {
+            String[] values = new String[] {"no albums to display"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(PhotosFragment.this.getActivity(),
+                    android.R.layout.simple_list_item_1, values);
+            setListAdapter(adapter);
         }
     }
 
@@ -95,7 +103,7 @@ public class PhotosFragment extends ListFragment{
     public class GetUserGroupsTask extends AsyncTask<Void, Void, String> {
 
         protected String doInBackground(Void... args) {
-            return RestApiV1.getUserGroups();
+            return RestApiV1.getUserGroups(0, 0);
         }
 
         protected void onPostExecute(String jsonResult) {
@@ -109,6 +117,8 @@ public class PhotosFragment extends ListFragment{
     public class GetGroupAlbumsByGroupIdTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... group_uuid) {
+            groupCounter++;
+            System.out.println("COUNTER = " + groupCounter);
             return RestApiV1.getGroupAlbumsByGroupId(group_uuid[0]);
         }
 
@@ -123,7 +133,7 @@ public class PhotosFragment extends ListFragment{
                     albumList.add(newAlbumList.get(j));
                 }
             }
-            if (albumList.isEmpty()) {
+            if (albumList.isEmpty() && totalNumOfGroups == groupCounter) {
                 String[] values = new String[] {"no albums to display"};
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(PhotosFragment.this.getActivity(),
                         android.R.layout.simple_list_item_1, values);

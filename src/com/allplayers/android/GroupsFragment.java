@@ -18,8 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AbsListView.OnScrollListener;
 
-public class GroupsFragment extends ListFragment{
-	private ArrayList<GroupData> groupList;
+public class GroupsFragment extends ListFragment {
+    private ArrayList<GroupData> groupList;
     private boolean hasGroups = false, loadMore = true;
     private String jsonResult;
     private int pageNumber = 0;
@@ -33,15 +33,13 @@ public class GroupsFragment extends ListFragment{
         super.onCreate(savedInstanceState);
         groupList = new ArrayList<GroupData>();
         adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1);
-
         loadingMore = new ProgressBar(this.getActivity());
-        
-           
+
         GetUserGroupsTask helper = new GetUserGroupsTask();
         helper.execute();
     }
-    
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         getListView().addFooterView(loadingMore);
         setListAdapter(adapter);
 
@@ -51,7 +49,7 @@ public class GroupsFragment extends ListFragment{
             private boolean loading = true;
             public void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
-                if (loading) {
+                if (hasGroups && loading) {
                     if (totalItemCount > previousTotal) {
                         loading = false;
                         previousTotal = totalItemCount;
@@ -66,11 +64,13 @@ public class GroupsFragment extends ListFragment{
             public void onScrollStateChanged(AbsListView arg0, int arg1) {
             }
 
+
+
         });
     }
 
     @Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         if (hasGroups && position < groupList.size()) {
             //Display the group page for the selected group
@@ -82,7 +82,7 @@ public class GroupsFragment extends ListFragment{
     /** Populates the list of groups to display to the UI thread. */
     protected void updateGroupData() {
         if (!groupList.isEmpty()) {
-        	
+
             // Counter to check if a full 8 new groups were loaded.
             int counter = 0;
             for (int i = currentAmountShown; i < groupList.size(); i++) {
@@ -106,6 +106,7 @@ public class GroupsFragment extends ListFragment{
         } else {
             hasGroups = false;
             adapter.add("no groups to display");
+            getListView().removeFooterView(loadingMore);
         }
     }
 
