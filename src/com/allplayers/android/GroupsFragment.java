@@ -40,7 +40,7 @@ public class GroupsFragment extends ListFragment {
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        getListView().addFooterView(loadingMore);
+        getListView().addFooterView(loadingMore, null, false);
         setListAdapter(adapter);
 
         getListView().setOnScrollListener(new OnScrollListener() {
