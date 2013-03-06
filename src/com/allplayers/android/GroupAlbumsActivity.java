@@ -12,19 +12,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class GroupAlbumsActivity  extends ListActivity {
     private ArrayList<AlbumData> albumList;
-
+    private TextView groupname;
+    private TextView subtitle;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         GroupData group = (new Router(this)).getIntentGroup();
-
+        groupname = new TextView(this);
+        groupname.setText(group.getTitle());
+        groupname.setTextSize(30);
+        subtitle = new TextView(this);
+        subtitle.setText("\t\tPhoto Albums");
+        subtitle.setTextSize(20);
         GetGroupAlbumsByGroupIdTask helper = new GetGroupAlbumsByGroupIdTask();
         helper.execute(group);
     }
@@ -35,7 +42,7 @@ public class GroupAlbumsActivity  extends ListActivity {
 
         if (!albumList.isEmpty()) {
             //Display the photos for the selected album
-            Intent intent = (new Router(this)).getAlbumPhotosActivityIntent(albumList.get(position));
+            Intent intent = (new Router(this)).getAlbumPhotosActivityIntent(albumList.get(position-2));
             startActivity(intent);
         }
     }
@@ -60,6 +67,8 @@ public class GroupAlbumsActivity  extends ListActivity {
             } else {
                 //Create a customized ArrayAdapter
                 AlbumAdapter adapter = new AlbumAdapter(getApplicationContext(), R.layout.albumlistitem, albumList);
+                getListView().addHeaderView(groupname, null, false);
+                getListView().addHeaderView(subtitle, null, false);
                 setListAdapter(adapter);
             }
         }

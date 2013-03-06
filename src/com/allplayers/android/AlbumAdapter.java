@@ -73,7 +73,7 @@ public class AlbumAdapter extends ArrayAdapter<AlbumData> {
         }
 
         //Set extra info
-        albumExtraInfo.setText("");
+        albumExtraInfo.setText(album.getPhotoCount() + " photos in this album");
         return row;
     }
 
