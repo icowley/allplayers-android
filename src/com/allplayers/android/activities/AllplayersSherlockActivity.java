@@ -82,6 +82,9 @@ public class AllplayersSherlockActivity extends SherlockActivity implements ISid
     protected void invokeActivity(Class activity) {
 
         Intent intent = new Intent(this, activity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
         overridePendingTransition(0, 0); // Disables new activity animation.
