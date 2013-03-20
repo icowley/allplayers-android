@@ -1,133 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/screen_layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#363636">
-  
-    <LinearLayout 
+    android:background="#363636"
+    android:orientation="vertical" >
+
+    <LinearLayout
         android:id="@+id/top_banner"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight=".9"
-        android:background="#000000">
+        android:background="#000000"
+        android:orientation="vertical" >
+
         <ImageView
             android:id="@+id/top_logo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:src="@drawable/app_logo" />
     </LinearLayout>
-    
-    <RelativeLayout 
-        android:orientation="vertical"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight=".1"
         android:background="#373737"
-        android:layout_weight=".1">
-        
+        android:orientation="vertical" >
+
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:src="@drawable/app_bg_artwork_cropped" />
-        
+
         <TableLayout
-          android:id="@+id/table"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:gravity="center_vertical"
-          android:paddingLeft="5px"
-          android:paddingRight="5px"
-          android:paddingTop="0px"
-          android:paddingBottom="0px">
-              <TableRow>
+            android:id="@+id/table"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="0px"
+            android:paddingLeft="5px"
+            android:paddingRight="5px"
+            android:paddingTop="0px" >
+
+            <TableRow>
+
                 <TextView
-                  android:visibility="gone"
-                  android:id="@+id/usernameLabel"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:text="Username:    "
-                  android:textSize="14sp"
-                  android:gravity="center_vertical"
-                  android:textColor="#33B5E5"
-                  android:layout_weight="0">
+                    android:id="@+id/usernameLabel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0"
+                    android:gravity="center_vertical"
+                    android:text="Username:    "
+                    android:textColor="#33B5E5"
+                    android:textSize="14sp"
+                    android:visibility="gone" >
                 </TextView>
+
                 <EditText
-                  android:visibility="gone"
-                  android:id="@+id/usernameField"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:text=""
-                  android:textSize="14sp"
-                  android:gravity="center"
-                  android:textColor="#33B5E5"
-                  android:inputType="textEmailAddress"
-                  android:layout_weight="1">
+                    android:id="@+id/usernameField"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    android:text=""
+                    android:textColor="#33B5E5"
+                    android:textSize="14sp"
+                    android:visibility="gone" >
                 </EditText>
-            </TableRow>        
-              <TableRow>
+            </TableRow>
+
+            <TableRow>
+
                 <TextView
-                  android:visibility="gone"
-                  android:id="@+id/passwordLabel"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:text="Password:     "
-                  android:textSize="14sp"
-                  android:gravity="center_vertical"
-                  android:textColor="#33B5E5"
-                  android:layout_weight="0">
+                    android:id="@+id/passwordLabel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="0"
+                    android:gravity="center_vertical"
+                    android:text="Password:     "
+                    android:textColor="#33B5E5"
+                    android:textSize="14sp"
+                    android:visibility="gone" >
                 </TextView>
+
                 <EditText
-                  android:visibility="gone"
-                  android:id="@+id/passwordField"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:text=""
-                  android:textSize="14sp"
-                  android:gravity="center"
-                  android:textColor="#33B5E5"
-                  android:password="true"
-                  android:inputType="textPassword"
-                  android:layout_weight="1">
+                    android:id="@+id/passwordField"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:inputType="textPassword"
+                    android:password="true"
+                    android:text=""
+                    android:textColor="#33B5E5"
+                    android:textSize="14sp"
+                    android:visibility="gone" >
                 </EditText>
-            </TableRow>        
+            </TableRow>
         </TableLayout>
-            
+
         <Button
-          android:visibility="gone"
-          android:id="@+id/loginButton"
-          android:layout_below="@+id/table"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:text="Login!"
-          android:textColor="#33B5E5"
-          android:gravity="center"
-          android:layout_weight="0">
+            android:id="@+id/loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/table"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:text="Login!"
+            android:textColor="#33B5E5"
+            android:visibility="gone" >
         </Button>
-        
+
         <ProgressBar
-            android:visibility="gone"
-            android:layout_below="@id/loginButton"
             android:id="@+id/ctrlActivityIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/loginButton"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true"
             android:indeterminateOnly="true"
-            android:keepScreenOn="true" />        
-
+            android:keepScreenOn="true"
+            android:visibility="gone" />
     </RelativeLayout>
-    
-    
-    <!-- Change to be activated by the physical search button 
+
+    <!--
+    Change to be activated by the physical search button 
     <Button
       android:id="@+id/findGroupsButton"
       android:layout_width="fill_parent"

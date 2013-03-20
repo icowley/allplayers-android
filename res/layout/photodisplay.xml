@@ -1,37 +1,35 @@
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/relativeLayout1"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" 
-  android:layout_centerHorizontal="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_centerHorizontal="true" >
 
-	<ViewFlipper
-	  android:id="@+id/Slider"
-	  android:layout_width="fill_parent"
-	  android:layout_height="fill_parent"
-	  android:layout_centerHorizontal="true">
+    <ViewFlipper
+        android:id="@+id/Slider"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true" >
 
-		<ImageView
-          android:id="@+id/firstPhoto"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_centerHorizontal="true"
-          android:src="@drawable/solid_black"/>
-		
-		<ImageView
-          android:id="@+id/secondPhoto"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_centerHorizontal="true"
-          android:src="@drawable/solid_black"/>
-		
-		<ImageView
-          android:id="@+id/thirdPhoto"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_centerHorizontal="true"
-          android:src="@drawable/solid_black"/>
-		
-	</ViewFlipper>
+        <ImageView
+            android:id="@+id/firstPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/solid_black" />
+
+        <ImageView
+            android:id="@+id/secondPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/solid_black" />
+
+        <ImageView
+            android:id="@+id/thirdPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/solid_black" />
+    </ViewFlipper>
 
 </LinearLayout>

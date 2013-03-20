@@ -2,13 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <fragment android:name="com.allplayers.android.PhotosFragment"
-            android:id="@+id/list"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
+    <fragment
+        android:id="@+id/list"
+        android:name="com.allplayers.android.PhotosFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
     <com.devspark.sidenavigation.SideNavigationView
-            android:id="@+id/side_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@+id/side_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </FrameLayout>

@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
-	  android:editable="false"
-	  android:text=""
-	  android:id="@+id/eventInfo"
-	  android:layout_width="match_parent"
-	  android:layout_height="wrap_content"/>
-    
-	<com.google.android.maps.MapView
-	  xmlns:android="http://schemas.android.com/apk/res/android"
-	  android:layout_below="@id/eventInfo"
-	  android:id="@+id/eventMap"
-	  android:layout_width="fill_parent"
-	  android:layout_height="fill_parent"
-	  android:clickable="true"
-	  android:apiKey="0alB8H6T-db781lpmO-JMXpe7_d2Uohis4iGIpw"/>
-	
-	<com.devspark.sidenavigation.SideNavigationView
-            android:id="@+id/side_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@+id/eventInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:text="" />
+
+    <com.google.android.maps.MapView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/eventMap"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/eventInfo"
+        android:apiKey="0alB8H6T-db781lpmO-JMXpe7_d2Uohis4iGIpw"
+        android:clickable="true" />
+
+    <com.devspark.sidenavigation.SideNavigationView
+        android:id="@+id/side_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

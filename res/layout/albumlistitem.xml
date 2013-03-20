@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="horizontal"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
 
-	<ImageView
-	  android:id="@+id/albumCoverPhoto"
-	  android:scaleType="centerCrop"
-	  android:layout_width="70dp"
-	  android:layout_height="70dp">
-	</ImageView>
+    <ImageView
+        android:id="@+id/albumCoverPhoto"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop" >
+    </ImageView>
 
-	<LinearLayout 
-	  xmlns:android="http://schemas.android.com/apk/res/android"
-	  android:orientation="vertical"
-	  android:paddingLeft="10dp"
-	  android:layout_width="fill_parent"
-	  android:layout_height="wrap_content">
-	    
-	<TextView
-	  android:layout_width="fill_parent"
-	  android:id="@+id/albumTitle"
-	  android:layout_height="wrap_content"
-	  android:textStyle="bold"
-	  android:textColor="#ffffff"
-	  android:textSize="16sp">
-	</TextView>
-	<TextView
-	  android:layout_width="fill_parent"
-	  android:id="@+id/albumExtraInfo"
-	  android:textColor="#ffffff"
-	  android:layout_height="wrap_content">
-	</TextView>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
 
-	</LinearLayout>
-	
+        <TextView
+            android:id="@+id/albumTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/albumExtraInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff" >
+        </TextView>
+    </LinearLayout>
+
 </LinearLayout>
