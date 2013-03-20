@@ -34,6 +34,8 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
     private ArrayList<GroupMemberData> membersList;
     private ActionBar actionbar;
     private SideNavigationView sideNavigationView;
+    private boolean isMember = false;
+    private boolean isLoggedIn = false;
 
     /**
      * Called when the activity is first created, this creates the Action Bar
@@ -49,8 +51,6 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
 
         group = (new Router(this)).getIntentGroup();
 
-        setButtonState(group.getUUID());
-
         setContentView(R.layout.grouppage);
 
         actionbar = getSupportActionBar();
@@ -59,7 +59,7 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
 
         TextView title = new TextView(this);
         title.setText(group.getTitle());
-        title.setTextSize(25);
+        title.setTextSize(20);
         title.setTypeface(Typeface.DEFAULT_BOLD);
         title.setTextColor(Color.WHITE);
         title.setLines(1);
@@ -73,9 +73,7 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
         sideNavigationView.setMenuItems(R.menu.side_navigation_menu);
         sideNavigationView.setMenuClickCallback(this);
         sideNavigationView.setMode(Mode.LEFT);
-
-        GetRemoteImageTask helper = new GetRemoteImageTask();
-        helper.execute(group.getLogo());
+        new GetGroupMembersByGroupIdTask().execute(group.getUUID());
         new GetGroupLocationTask().execute(group.getUUID());
     }
 
@@ -148,19 +146,6 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
     }
 
     /**
-     * Checks if the user is a member of the group in order to determine if they
-     * should have access to the buttons provided to view members, events, and
-     * photos.
-     *
-     * @param group_uuid: The uuid of the group to be checked.
-     */
-    private void setButtonState(String group_uuid) {
-
-        GetGroupMembersByGroupIdTask helper = new GetGroupMembersByGroupIdTask();
-        helper.execute(group_uuid);
-    }
-
-    /**
      * Gets a remote image using a REST call.
      */
     public class GetRemoteImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -174,47 +159,6 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
 
             ImageView imView = (ImageView) findViewById(R.id.groupLogo);
             imView.setImageBitmap(logo);
-        }
-    }
-
-    public class GetGroupLocationTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... group_uuid) {
-            return RestApiV1.getGroupInformationByGroupId(group_uuid[0]);
-        }
-
-        protected void onPostExecute(String jsonResult) {
-            try {
-                JSONObject groupInfo = new JSONObject(jsonResult);
-                group.setZip(groupInfo.getJSONObject("location").getString("zip"));
-                group.setLatLon(groupInfo.getJSONObject("location").getString("latitude"), groupInfo.getJSONObject("location").getString("longitude"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    /*
-     * Checks if the user is a group member. If the user is a group member the
-     * group page interface is set up.
-     */
-    public class GetGroupMembersByGroupIdTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... group_uuid) {
-            return RestApiV1.getGroupMembersByGroupId(group_uuid[0]);
-        }
-
-        protected void onPostExecute(String jsonResult) {
-            boolean isMember = false;
-            boolean isLoggedIn = RestApiV1.isLoggedIn();
-            GroupMembersMap groupMembers = new GroupMembersMap(jsonResult);
-            membersList = groupMembers.getGroupMemberData();
-            String currentUUID = RestApiV1.getCurrentUserUUID();
-            for (int i = 0; i < membersList.size(); i++) {
-                if (membersList.get(i).getUUID().equals(currentUUID)) {
-                    isMember = true;
-                    break;
-                }
-            }
 
             final ImageButton groupMembersButton = (ImageButton) findViewById(R.id.groupMembersButton);
             if (isMember && isLoggedIn) groupMembersButton.setVisibility(View.VISIBLE);
@@ -255,6 +199,47 @@ public class GroupPageActivity extends AllplayersSherlockActivity {
                     startActivity(intent);
                 }
             });
+        }
+    }
+
+    public class GetGroupLocationTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... group_uuid) {
+            return RestApiV1.getGroupInformationByGroupId(group_uuid[0]);
+        }
+
+        protected void onPostExecute(String jsonResult) {
+            try {
+                JSONObject groupInfo = new JSONObject(jsonResult);
+                group.setZip(groupInfo.getJSONObject("location").getString("zip"));
+                group.setLatLon(groupInfo.getJSONObject("location").getString("latitude"), groupInfo.getJSONObject("location").getString("longitude"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    /*
+     * Checks if the user is a group member. If the user is a group member the
+     * group page interface is set up.
+     */
+    public class GetGroupMembersByGroupIdTask extends AsyncTask<String, Void, String> {
+        protected String doInBackground(String... group_uuid) {
+            return RestApiV1.getGroupMembersByGroupId(group_uuid[0]);
+        }
+
+        protected void onPostExecute(String jsonResult) {
+            isLoggedIn = RestApiV1.isLoggedIn();
+            GroupMembersMap groupMembers = new GroupMembersMap(jsonResult);
+            membersList = groupMembers.getGroupMemberData();
+            String currentUUID = RestApiV1.getCurrentUserUUID();
+            for (int i = 0; i < membersList.size(); i++) {
+                if (membersList.get(i).getUUID().equals(currentUUID)) {
+                    isMember = true;
+                    break;
+                }
+            }
+            new GetRemoteImageTask().execute(group.getLogo());
         }
     }
 }
