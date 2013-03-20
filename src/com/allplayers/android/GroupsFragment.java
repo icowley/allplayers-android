@@ -27,6 +27,7 @@ public class GroupsFragment extends ListFragment {
     private int currentAmountShown = 0;
     private ArrayAdapter<String> adapter;
     private ProgressBar loadingMore;
+    private int intendedGroups;
 
     private Activity parentActivity;
 
@@ -108,7 +109,10 @@ public class GroupsFragment extends ListFragment {
             }
         } else {
             hasGroups = false;
-            adapter.add("no groups to display");
+            if(adapter.getPosition("no groups to display") < 0) {
+                adapter.add("no groups to display");
+            }
+            getListView().removeFooterView(loadingMore);
         }
     }
 

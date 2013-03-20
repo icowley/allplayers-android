@@ -100,11 +100,10 @@ public class PhotosFragment extends ListFragment {
     public class GetUserGroupsTask extends AsyncTask<Void, Void, String> {
 
         protected String doInBackground(Void... args) {
-            return RestApiV1.getUserGroups();
+            return RestApiV1.getUserGroups(0,0);
         }
 
         protected void onPostExecute(String jsonResult) {
-            groupsLoaded++;
             populateGroupAlbums(jsonResult);
         }
     }
@@ -115,6 +114,7 @@ public class PhotosFragment extends ListFragment {
     public class GetGroupAlbumsByGroupIdTask extends AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... group_uuid) {
+            groupsLoaded++;
             return RestApiV1.getGroupAlbumsByGroupId(group_uuid[0]);
         }
 
