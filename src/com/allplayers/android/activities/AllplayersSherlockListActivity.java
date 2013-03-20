@@ -49,7 +49,7 @@ public class AllplayersSherlockListActivity extends SherlockListActivity impleme
         case R.id.side_navigation_menu_item4:
             invokeActivity(EventsActivity.class);
             break;
-            
+
         case R.id.side_navigation_menu_item5: {
             search();
             break;
@@ -71,7 +71,7 @@ public class AllplayersSherlockListActivity extends SherlockListActivity impleme
 
         finish();
     }
-    
+
     /**
      * Helper method for onSideNavigationItemClick. Starts the passed in
      * activity.
@@ -86,7 +86,7 @@ public class AllplayersSherlockListActivity extends SherlockListActivity impleme
 
         overridePendingTransition(0, 0); // Disables new activity animation.
     }
-    
+
     /**
      * Opens the search screen.
      */

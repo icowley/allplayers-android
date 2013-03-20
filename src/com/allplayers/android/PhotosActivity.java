@@ -83,7 +83,7 @@ public class PhotosActivity extends AllplayersSherlockFragmentActivity {
         case R.id.side_navigation_menu_item4:
             invokeActivity(EventsActivity.class);
             break;
-            
+
         case R.id.side_navigation_menu_item5: {
             search();
             break;
@@ -98,7 +98,7 @@ public class PhotosActivity extends AllplayersSherlockFragmentActivity {
             refresh();
             break;
         }
-        
+
         default:
             return;
         }

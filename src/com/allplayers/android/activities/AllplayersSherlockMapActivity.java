@@ -49,7 +49,7 @@ public class AllplayersSherlockMapActivity extends SherlockMapActivity implement
         case R.id.side_navigation_menu_item4:
             invokeActivity(EventsActivity.class);
             break;
-            
+
         case R.id.side_navigation_menu_item5: {
             search();
             break;
@@ -71,7 +71,7 @@ public class AllplayersSherlockMapActivity extends SherlockMapActivity implement
 
         finish();
     }
-    
+
     /**
      * Helper method for onSideNavigationItemClick. Starts the passed in
      * activity.
@@ -86,7 +86,7 @@ public class AllplayersSherlockMapActivity extends SherlockMapActivity implement
 
         overridePendingTransition(0, 0); // Disables new activity animation.
     }
-    
+
     /**
      * Opens the search screen.
      */
@@ -134,7 +134,7 @@ public class AllplayersSherlockMapActivity extends SherlockMapActivity implement
             return null;
         }
     }
-    
+
     @Override
     protected boolean isRouteDisplayed() {
         // TODO Auto-generated method stub

@@ -21,7 +21,6 @@ public class PhotosFragment extends ListFragment {
     private static Activity parentActivity;
     private int numOfGroups, groupsLoaded;
 
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,11 +29,12 @@ public class PhotosFragment extends ListFragment {
 
         String jsonResult;
 
-        if (LocalStorage.getTimeSinceLastModification("UserAlbums") / 1000 / 60 < 60) { //more recent than 60 minutes
+        if (LocalStorage.getTimeSinceLastModification("UserAlbums") / 1000 / 60 < 60) {
             AlbumsMap albums;
             ArrayList<AlbumData> newAlbumList;
 
-            String storedAlbums = LocalStorage.readUserAlbums(parentActivity.getBaseContext());
+            String storedAlbums = LocalStorage.readUserAlbums(parentActivity
+                                  .getBaseContext());
 
             String[] storedAlbumsList = storedAlbums.split("\n");
 
@@ -49,9 +49,10 @@ public class PhotosFragment extends ListFragment {
                 }
             }
         } else {
-            //check local storage
-            if (LocalStorage.getTimeSinceLastModification("UserGroups") / 1000 / 60 < 60) { //more recent than 60 minutes
-                jsonResult = LocalStorage.readUserGroups(parentActivity.getBaseContext());
+            // check local storage
+            if (LocalStorage.getTimeSinceLastModification("UserGroups") / 1000 / 60 < 60) {
+                jsonResult = LocalStorage.readUserGroups(parentActivity
+                             .getBaseContext());
                 populateGroupAlbums(jsonResult);
             } else {
                 GetUserGroupsTask helper = new GetUserGroupsTask();
@@ -67,14 +68,16 @@ public class PhotosFragment extends ListFragment {
 
         if (!albumList.isEmpty()) {
             // Display the photos for the selected album
-            Intent intent = (new Router(parentActivity)).getAlbumPhotosActivityIntent(albumList.get(position));
+            Intent intent = (new Router(parentActivity))
+                            .getAlbumPhotosActivityIntent(albumList.get(position));
             startActivity(intent);
         }
     }
 
     /**
-     * Uses the json result passed in, and populates the UI with a list of albums from the
-     * user's groups.
+     * Uses the json result passed in, and populates the UI with a list of
+     * albums from the user's groups.
+     *
      * @param jsonResult
      */
     protected void populateGroupAlbums(String jsonResult) {
@@ -84,13 +87,20 @@ public class PhotosFragment extends ListFragment {
         if (!groupList.isEmpty()) {
             String group_uuid;
 
-            LocalStorage.writeUserAlbums(parentActivity.getBaseContext(), "", true);
+            LocalStorage.writeUserAlbums(parentActivity.getBaseContext(), "",
+                                         true);
             numOfGroups = groupList.size();
             for (int i = 0; i < numOfGroups; i++) {
                 group_uuid = groupList.get(i).getUUID();
                 GetGroupAlbumsByGroupIdTask helper = new GetGroupAlbumsByGroupIdTask();
                 helper.execute(group_uuid);
             }
+        } else {
+            String[] values = new String[] { "no albums to display" };
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                PhotosFragment.parentActivity,
+                android.R.layout.simple_list_item_1, values);
+            setListAdapter(adapter);
         }
     }
 
@@ -100,7 +110,7 @@ public class PhotosFragment extends ListFragment {
     public class GetUserGroupsTask extends AsyncTask<Void, Void, String> {
 
         protected String doInBackground(Void... args) {
-            return RestApiV1.getUserGroups(0,0);
+            return RestApiV1.getUserGroups(0, 0);
         }
 
         protected void onPostExecute(String jsonResult) {
@@ -111,7 +121,8 @@ public class PhotosFragment extends ListFragment {
     /*
      * Gets a group's photo albums using a rest call.
      */
-    public class GetGroupAlbumsByGroupIdTask extends AsyncTask<String, Void, String> {
+    public class GetGroupAlbumsByGroupIdTask extends
+        AsyncTask<String, Void, String> {
 
         protected String doInBackground(String... group_uuid) {
             groupsLoaded++;
@@ -130,14 +141,17 @@ public class PhotosFragment extends ListFragment {
                 }
             }
             if (albumList.isEmpty() && groupsLoaded == numOfGroups) {
-                String[] values = new String[] {"no albums to display"};
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(PhotosFragment.parentActivity,
-                        android.R.layout.simple_list_item_1, values);
+                String[] values = new String[] { "no albums to display" };
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    PhotosFragment.parentActivity,
+                    android.R.layout.simple_list_item_1, values);
                 setListAdapter(adapter);
             } else {
-                //Create a customized ArrayAdapter
+                // Create a customized ArrayAdapter
                 // TODO Fix to use only one adapter and push new items into it.
-                AlbumAdapter adapter = new AlbumAdapter(PhotosFragment.parentActivity.getApplicationContext(), R.layout.albumlistitem, albumList);
+                AlbumAdapter adapter = new AlbumAdapter(
+                    PhotosFragment.parentActivity.getApplicationContext(),
+                    R.layout.albumlistitem, albumList);
                 setListAdapter(adapter);
             }
         }

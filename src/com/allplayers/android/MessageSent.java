@@ -86,7 +86,7 @@ public class MessageSent extends AllplayersSherlockListActivity {
 
     /**
      * Listener for the Action Bar Options Menu.
-     * 
+     *
      * @param item: The selected menu item.
      */
     @Override
@@ -94,19 +94,19 @@ public class MessageSent extends AllplayersSherlockListActivity {
 
         switch (item.getItemId()) {
 
-            case android.R.id.home: {
-                sideNavigationView.toggleMenu();
-                return true;
-            }
+        case android.R.id.home: {
+            sideNavigationView.toggleMenu();
+            return true;
+        }
 
-            default:
-                return super.onOptionsItemSelected(item);
+        default:
+            return super.onOptionsItemSelected(item);
         }
     }
 
     /**
      * Listener for the Side Navigation Menu.
-     * 
+     *
      * @param itemId: The ID of the list item that was selected.
      */
     @Override
@@ -114,39 +114,39 @@ public class MessageSent extends AllplayersSherlockListActivity {
 
         switch (itemId) {
 
-            case R.id.side_navigation_menu_item1:
-                invokeActivity(GroupsActivity.class);
-                break;
+        case R.id.side_navigation_menu_item1:
+            invokeActivity(GroupsActivity.class);
+            break;
 
-            case R.id.side_navigation_menu_item2:
-                invokeActivity(MessageActivity.class);
-                break;
+        case R.id.side_navigation_menu_item2:
+            invokeActivity(MessageActivity.class);
+            break;
 
-            case R.id.side_navigation_menu_item3:
-                invokeActivity(PhotosActivity.class);
-                break;
+        case R.id.side_navigation_menu_item3:
+            invokeActivity(PhotosActivity.class);
+            break;
 
-            case R.id.side_navigation_menu_item4:
-                invokeActivity(EventsActivity.class);
-                break;
+        case R.id.side_navigation_menu_item4:
+            invokeActivity(EventsActivity.class);
+            break;
 
-            case R.id.side_navigation_menu_item5: {
-                search();
-                break;
-            }
+        case R.id.side_navigation_menu_item5: {
+            search();
+            break;
+        }
 
-            case R.id.side_navigation_menu_item6: {
-                logOut();
-                break;
-            }
+        case R.id.side_navigation_menu_item6: {
+            logOut();
+            break;
+        }
 
-            case R.id.side_navigation_menu_item7: {
-                refresh();
-                break;
-            }
+        case R.id.side_navigation_menu_item7: {
+            refresh();
+            break;
+        }
 
-            default:
-                return;
+        default:
+            return;
         }
 
         finish();
