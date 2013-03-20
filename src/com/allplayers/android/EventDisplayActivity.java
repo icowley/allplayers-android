@@ -40,14 +40,18 @@ public class EventDisplayActivity extends AllplayersSherlockMapActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.eventdetail);
 
+        // Create the map and event information.
         TextView eventInfo = (TextView)findViewById(R.id.eventInfo);
         MapView map = (MapView)findViewById(R.id.eventMap);
+        // Set the map to have native pinch-zoom.
         map.setBuiltInZoomControls(true);
 
+        // Get the event and set the event information.
         EventData event = (new Router(this)).getIntentEvent();
         eventInfo.setText("Event Title: " + event.getTitle() + "\nDescription: " +
                           event.getDescription() + "\nCategory: " + event.getCategory() +
                           "\nStart: " + event.getStartDateString() + "\nEnd: " + event.getEndDateString());
+
 
         MapController mapController = map.getController();
         String lat = "";
@@ -55,9 +59,11 @@ public class EventDisplayActivity extends AllplayersSherlockMapActivity {
         String lon = "";
         lon = event.getLongitude();
 
+        // If there is no lat or long with the event, there is no need to display a map.
         if (lat.equals("") || lon.equals("")) {
             map.setVisibility(View.GONE);
         } else {
+            // If there is no address to the resource, get its lat and long from its zipcode.
             if (lat.equals("0.000000") || lon.equals("0.000000")) {
                 Geocoder geo = new Geocoder(this);
                 try {
@@ -69,14 +75,16 @@ public class EventDisplayActivity extends AllplayersSherlockMapActivity {
                 }
             }
 
+            // Center the map around the event's location and set the zoom to show a reasonable amount.
             GeoPoint point = new GeoPoint((int)(Float.parseFloat(lat) * 1000000), (int)(Float.parseFloat(lon) * 1000000));
             mapController.setCenter(point);
             mapController.setZoom(15);
 
+            // Add an icon over the position of the group that displays the name and time of it.
             List<Overlay> mapOverlays = map.getOverlays();
             Drawable drawable = this.getResources().getDrawable(R.drawable.mini_icon);
             mItemizedOverlay itemizedoverlay = new mItemizedOverlay(drawable, this);
-            OverlayItem center = new OverlayItem(point, event.getTitle(), event.getZip());
+            OverlayItem center = new OverlayItem(point, event.getTitle(), event.getStartDateString() + " - " + event.getEndDateString());
             itemizedoverlay.addOverlay(center);
             mapOverlays.add(itemizedoverlay);
         }
@@ -97,7 +105,6 @@ public class EventDisplayActivity extends AllplayersSherlockMapActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
 
         case android.R.id.home: {

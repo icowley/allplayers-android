@@ -39,11 +39,13 @@ public class FindGroupsActivity extends AllplayersSherlockActivity {
         sideNavigationView.setMenuClickCallback(this);
         sideNavigationView.setMode(Mode.LEFT);
 
+        // Get access to all of the input fields.
         searchEditText = (EditText)findViewById(R.id.searchGroupsField);
         zipcodeEditText = (EditText)findViewById(R.id.searchGroupsZipcodeField);
         distanceEditText = (EditText)findViewById(R.id.searchGroupsDistanceField);
         distanceLabel = (TextView)findViewById(R.id.distanceLabel);
 
+        // Check the zipcode as they type and if it is 5 digits, let them change distance.
         zipcodeEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -65,8 +67,8 @@ public class FindGroupsActivity extends AllplayersSherlockActivity {
             }
         });
 
-        final Button logOnButton = (Button) findViewById(R.id.searchGroupsButton);
-        logOnButton.setOnClickListener(new View.OnClickListener() {
+        final Button submit = (Button) findViewById(R.id.searchGroupsButton);
+        submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String query = searchEditText.getText().toString().trim();
                 String zipcodeString = zipcodeEditText.getText().toString().trim();
@@ -75,6 +77,7 @@ public class FindGroupsActivity extends AllplayersSherlockActivity {
                 int zipcode = 0;
                 int distance = 10;
 
+                // Check if the zipcode is all numbers and if so parse it into an integer.
                 if (zipcodeString.length() == 5) {
                     for (int i = 0; i < 5; i++) {
                         if (!Character.isDigit(zipcodeString.charAt(i))) {
@@ -85,6 +88,7 @@ public class FindGroupsActivity extends AllplayersSherlockActivity {
                     }
                 }
 
+                // Check if the distance is all numbers and is greater than 1 and parse if so.
                 if (distanceString.length() >= 1) {
                     for (int i = 0; i < distanceString.length(); i++) {
                         if (!Character.isDigit(distanceString.charAt(i))) {

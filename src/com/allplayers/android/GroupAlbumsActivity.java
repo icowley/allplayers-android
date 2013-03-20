@@ -138,6 +138,7 @@ public class GroupAlbumsActivity  extends AllplayersSherlockListActivity {
             AlbumsMap albums = new AlbumsMap(jsonResult);
             albumList = albums.getAlbumData();
 
+            // If there are no albums for the group, say so.
             if (albumList.isEmpty()) {
                 String[] values = new String[] {"no albums to display"};
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(GroupAlbumsActivity.this,

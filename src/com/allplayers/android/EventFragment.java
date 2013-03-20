@@ -49,7 +49,7 @@ public class EventFragment extends ListFragment {
         EventsMap events = new EventsMap(jsonResult);
         eventsList = events.getEventData();
         HashMap<String, String> map;
-
+        // If the list of events is not empty, add them to the map.
         if (!eventsList.isEmpty()) {
             for (int i = 0; i < eventsList.size(); i++) {
                 map = new HashMap<String, String>();
@@ -59,9 +59,8 @@ public class EventFragment extends ListFragment {
                 map.put("line2", start);
                 list.add(map);
             }
-
             hasEvents = true;
-        } else {
+        } else { // If the are no events, show an item that says so.
             map = new HashMap<String, String>();
             map.put("line1", "No events to display.");
             map.put("line2", "");

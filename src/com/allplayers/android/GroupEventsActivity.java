@@ -143,6 +143,7 @@ public class GroupEventsActivity extends AllplayersSherlockListActivity {
             eventsList = events.getEventData();
 
             HashMap<String, String> map;
+            // If the group's eventlist is not exmpty, add the to the list.
             if (!eventsList.isEmpty()) {
                 for (int i = 0; i < eventsList.size(); i++) {
                     map = new HashMap<String, String>();
@@ -153,13 +154,14 @@ public class GroupEventsActivity extends AllplayersSherlockListActivity {
                     list.add(map);
                 }
                 hasEvents = true;
-            } else {
+            } else { // If there are no events, say so.
                 map = new HashMap<String, String>();
                 map.put("line1", "No events to display.");
                 map.put("line2", "");
                 list.add(map);
                 hasEvents = false;
             }
+            // Set the adapter for the list.
             String[] from = {"line1", "line2"};
             int[] to = {android.R.id.text1, android.R.id.text2};
             SimpleAdapter adapter = new SimpleAdapter(GroupEventsActivity.this, list, android.R.layout.simple_list_item_2, from, to);

@@ -19,11 +19,9 @@ public class AlbumsMap {
         Gson gson = new Gson();
         try {
             JSONArray jsonArray = new JSONArray(jsonResult);
-
             if (jsonArray.length() > 0) {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     AlbumData album = gson.fromJson(jsonArray.getString(i), AlbumData.class);
-
                     if (album.isNew(albums)) {
                         albums.add(album);
                     }

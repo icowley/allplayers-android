@@ -46,6 +46,7 @@ public class AlbumPhotosActivity extends AllplayersSherlockActivity {
 
         final AlbumData album = (new Router(this)).getIntentAlbum();
         photoList = new ArrayList<PhotoData>();
+        // Grid to display the photos in.
         grid = (GridView) findViewById(R.id.gridview);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -142,14 +143,13 @@ public class AlbumPhotosActivity extends AllplayersSherlockActivity {
      * Creates an array adapter to store the album's photos.
      */
     public void setAdapter() {
-
+        // If there are no photos in the album, create a single item to say so.
         if (photoList.isEmpty()) {
             String[] values = new String[] {"no photos to display"};
-
             blankAdapter = new ArrayAdapter<String>(AlbumPhotosActivity.this,
                                                     android.R.layout.simple_list_item_1, values);
             grid.setAdapter(blankAdapter);
-        } else {
+        } else { // If there are photos, add in our photoAdapter.
             photoAdapter = new PhotoAdapter(getApplicationContext());
             grid.setAdapter(photoAdapter);
         }
@@ -160,12 +160,12 @@ public class AlbumPhotosActivity extends AllplayersSherlockActivity {
      * @param jsonResult The album's photos.
      */
     public void updateAlbumPhotos(String jsonResult) {
-
+        // Get the new photos from the json.
         PhotosMap photos = new PhotosMap(jsonResult);
+        // Add the photos into our list of photos.
         photoList.addAll(photos.getPhotoData());
-
+        // Reset our adapter with new information.
         setAdapter();
-
         if (photoList.size() != 0) {
             photoAdapter.addAll(photoList);
         }
@@ -175,20 +175,12 @@ public class AlbumPhotosActivity extends AllplayersSherlockActivity {
      * Gets the photos from an album specified by its album ID using a rest call.
      */
     public class GetAlbumPhotosByAlbumIdTask extends AsyncTask<AlbumData, Void, String> {
-
-        /**
-         * Gets the photos in a specified album using a rest call.
-         */
+        // Gets the photos in a specified album using a rest call.
         protected String doInBackground(AlbumData... album) {
-
             return RestApiV1.getAlbumPhotosByAlbumId(album[0].getUUID(), 0, 0);
         }
-
-        /**
-         * Calls a method to organize the fetched photos into a map.
-         */
+        // Adds the photos into from this json call to the album display.
         protected void onPostExecute(String jsonResult) {
-
             updateAlbumPhotos(jsonResult);
         }
     }
